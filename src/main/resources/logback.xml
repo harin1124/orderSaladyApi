@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration scan="true">
+	<!-- Appenders -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- <filter class="orderSaladyApi.log.LogbackFilter"/> -->
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%boldCyan(API) %boldYellow(%-5level) %green(%d{yyyy-MM-dd HH:mm:ss}) %boldMagenta([%logger{0}:%line]) %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- Logger -->
+	<logger name="saladyOrderApi" level="INFO" appender-ref="console"/>
+	
+	<!-- MYBATIS -->
+	<logger level="OFF" appender-ref="console" name="org.mybatis.spring.SqlSessionUtils"/>
+	<!-- JDBC -->
+	<logger level="OFF" appender-ref="console" name="jdbc.connection"/>
+	<logger level="OFF" appender-ref="console" name="jdbc.audit"/>
+	<logger level="OFF" appender-ref="console" name="jdbc.sqltiming"/>
+	<logger level="INFO" appender-ref="console" name="jdbc.sqlonly"/>
+	<logger level="OFF" appender-ref="console" name="jdbc.resultsettable"/>
+	<logger level="OFF" appender-ref="console" name="jdbc.resultset"/>
+	<!-- Hibernate -->
+	<logger level="OFF" appender-ref="console" name="org.hibernate.internal.SessionFactoryImpl"/>
+	<!-- HikariPool -->
+	<logger level="OFF" appender-ref="console" name="com.zaxxer.hikari.pool.HikariPool"/>
+	<!-- BeanFactory -->
+	<logger level="OFF" appender-ref="console" name="org.springframework.beans.factory.support.DefaultListableBeanFactory"/>
+	
+	<!-- Root Logger -->
+	<root level="context">
+		<appender-ref ref="console"/>
+	</root>
+</configuration>

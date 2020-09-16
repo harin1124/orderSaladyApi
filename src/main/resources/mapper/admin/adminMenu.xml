@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderSaladyApi.admin.mapper.AdminMenuMapper">
+	<select id="getMenuTypeList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[/* AdminMenuMapper.getMenuTypeList | 메뉴 타입 조회 */]]>
+		SELECT
+			ROW_SEQ,
+			KO_NAME,
+			EN_NAME,
+			TYPE_DESC
+			ORDER_SEQ
+		FROM SALADY_MENU_TYPE
+		WHERE DEL_YN=0
+		ORDER BY ORDER_SEQ ASC
+	</select>
+	
+	<insert id="insertSaladyMenu" parameterType="orderSaladyApi.dto.SaladyMenuDto">
+		<![CDATA[/* AdminMenuMapper.insertSaladyMenu | 메뉴 등록 */]]>
+		INSERT INTO SALADY_MENU (
+			KO_NAME, EN_NAME, MENU_DESC, PRICE,
+			SALE_YN, SALE_PERIOD_YN, SALE_START_DATE, SALE_END_DATE,
+			DISCOUNT_YN, DISCOUNT_PRICE, DISCOUNT_PERIOD_YN, DISCOUNT_START_DATE, DISCOUNT_END_DATE,
+			CAPACITY, CALORIES, CARBOHYDRATE, SUGAR, PROTEIN, FAT, TRANS_FAT, SATURATED_FAT, CHOLESTEROL, SODIUM,
+			REG_DATE, DEL_YN
+		)
+		VALUES (
+			#{koName}, #{enName}, #{menuDesc}, #{price},
+			#{saleYn}, #{salePeriodYn}, #{saleStartDate}, #{saleEndDate},
+			#{discountYn}, #{discountPrice}, #{discountPeriodYn}, #{discountStartDate}, #{discountEndDate},
+			#{capacity}, #{calories}, #{carbohydrate}, #{sugar}, #{protein}, #{fat}, #{transFat}, #{saturatedFat}, #{cholesterol}, #{sodium},
+			sysdate(), 0
+		)
+	</insert>
+	
+	<select id="getMenuList" parameterType="hashmap" resultType="hashmap">
+		SELECT
+			ROW_SEQ,
+			KO_NAME,
+			EN_NAME,
+			MENU_DESC,
+			PRICE,
+			SALE_YN,
+			SALE_PERIOD_YN,
+			SALE_START_DATE,
+			SALE_END_DATE,
+			DISCOUNT_YN,
+			DISCOUNT_PRICE,
+			DISCOUNT_PERIOD_YN,
+			DISCOUNT_START_DATE,
+			DISCOUNT_END_DATE,
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE,
+			DEL_YN,
+			DEL_DATE
+		FROM SALADY_MENU
+		WHERE DEL_YN='N'
+		LIMIT #{PAGE_NO}, #{OPTION_PAGE_CONTENT_SIZE}
+	</select>
+	
+	<select id="getMenuListCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM SALADY_MENU
+		WHERE DEL_YN='N'
+	</select>
+	
+	<select id="getMenuInfo" parameterType="hashmap" resultType="hashmap">
+		SELECT
+			ROW_SEQ,
+			KO_NAME,
+			EN_NAME,
+			MENU_DESC,
+			PRICE,
+			SALE_YN,
+			SALE_PERIOD_YN,
+			SALE_START_DATE,
+			SALE_END_DATE,
+			DISCOUNT_YN,
+			DISCOUNT_PRICE,
+			DISCOUNT_PERIOD_YN,
+			DISCOUNT_START_DATE,
+			DISCOUNT_END_DATE,
+			DATE_FORMAT(REG_DATE, '%Y-%m-%d') AS REG_DATE,
+			DEL_YN,
+			DEL_DATE
+		FROM SALADY_MENU
+		WHERE ROW_SEQ=${ROW_SEQ} AND DEL_YN='N'
+	</select>
+</mapper>
