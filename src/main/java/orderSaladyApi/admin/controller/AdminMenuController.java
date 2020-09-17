@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import orderSaladyApi.admin.service.AdminMenuService;
 import orderSaladyApi.dto.SaladyMenuDto;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name="관리자 메뉴 카테고리 API", description="메뉴 등록, 수정 및 삭제와 같은 API 포함")
 @RequestMapping("/admin/menu")
 public class AdminMenuController {
 	private Logger log=LoggerFactory.getLogger(this.getClass());
@@ -26,6 +31,12 @@ public class AdminMenuController {
 	private final AdminMenuService adminMenuService;
 	
 	// 메뉴 타입
+	/*
+	/*@ApiResponses(value={
+		@ApiResponse()
+	})*/
+	//@ApiOperation(value = "getGreeting!", nickname = "getGreeting")
+	@Operation(summary="메뉴 타입",description="메뉴 타입에 paramMap을 받아 필터링 가능하게 처리하며,<br>paramMap이 비어있는 경우 모든 메뉴 타입이 출력됩니다.")
 	@GetMapping("/menu-type-list")
 	public String menuTypeSelect(HashMap<String, Object> paramMap)throws Exception{
 		log.debug("PARAM MAP : "+paramMap);
