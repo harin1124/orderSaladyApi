@@ -1,3 +1,22 @@
 swagger: "2.0"
 info:
-  description: "스웨거 테스트 API 문서입니다."
+  description: "OrderSalady의 API 서버입니다"
+  version: "1.0.0"
+  title: "OrderSaladyApi"
+  contact:
+    email: "lolrin1124@gmail.com"
+host: "localhost:8090"
+basePath: "/v2"
+tags:
+- name: "admin"
+  description: "어드민 관련"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "http"
+paths:
+  /admin:
+    post:
+      tags:
+      - "admin"

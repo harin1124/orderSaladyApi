@@ -20,7 +20,6 @@ public class OrderSaladyApiApplication {
 	
 	@Bean
 	public Docket swagger(){
-		new Docket(SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();
-		return null;
+		return new Docket(SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();
 	}
 }
